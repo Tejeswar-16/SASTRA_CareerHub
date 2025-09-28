@@ -2,6 +2,9 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { auth } from "../_util/config";
+import { createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
 
@@ -14,6 +17,9 @@ export default function Home() {
   const [signUpConfirmPassword,setSignUpConfirmPassword] = useState("");
   const [pwdError,setPwdError] = useState("");
   const [emailError,setEmailError] = useState("");
+
+  //Router for navigation
+  const router = useRouter();
 
   //Sign In to Sign Up
   function handleSignUpClick(){
@@ -77,9 +83,65 @@ export default function Home() {
       }
     }
 
+  //Sign Up with Firebase
+  async function handleSignUp(name,email,password){
+    if (emailError != ""){
+      alert("Invalid Email");
+      return;
+    }
+    if (pwdError != ""){
+      alert("Passwords do not match");
+      return;
+    }
+    try
+    {
+      const userCredential = await createUserWithEmailAndPassword(auth,email,password);
+      const user = userCredential.user;
+      await updateProfile(user, {displayName: name});
+      alert("Success! Created account with SASTRA CareerHub");
+    }
+    catch (error)
+    {
+      if (error.code == "auth/password-does-not-meet-requirements")
+        setPwdError("Password must contain at least 8 characters, an upper case character, numeric character, a non-alphanumeric character");
+    }
+  } 
+
+  //Sign In with firebase
+  async function handleSignIn(email,password){
+    try
+    {
+      await signInWithEmailAndPassword(auth,email,password);
+      router.push("/dashboard");
+    }
+    catch(error)
+    {
+      if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password" || error.code === "auth/invalid-credential")
+        alert("Hey! Invalid Email or Password");
+    }
+  }
+
   //Password Reset Alert Message
-  function handleForgotPassword(){
-    alert("A password reset link has been sent to your registered SASTRA email ID")
+  async function handleForgotPassword(email){
+    if (email === ""){
+      setEmailError("Provide your email");
+      return;
+    }
+    if (emailError != ""){
+        alert(emailError);
+        return;
+    }
+    setEmailError("");
+    try
+    {
+      await sendPasswordResetEmail(auth,email);
+      alert("A password reset link has been sent to your registered SASTRA email ID")
+    }
+    catch(error)
+    {
+      if (error.code === "auth/invalid-email")
+        setEmailError("Invalid Email");
+    }
   }
 
   return (
@@ -93,7 +155,7 @@ export default function Home() {
           <h1 className="select-none flex justify-center font-sans font-semibold text-2xl pt-2">Sign In</h1>
           <h1 className="select-none flex justify-center mx-2 md:mx-0 font-sans text-sm md:text-lg text-gray-600 pb-2 italic">Streamline Your Journey to Success</h1>
           <hr className="text-gray-400"></hr>
-          <form>
+          <form onSubmit={(e) => {e.preventDefault();handleSignIn(signInEmail,signInPassword)}}>
             <div className="flex flex-col">
               <input onChange={(e) => {setSignInEmail(e.target.value);checkEmail(e.target.value)}} required className="font-sans p-2 rounded-lg mx-4 mt-4 mb-2 border border-gray-400 h-10" type="email" placeholder="Email"/>
               <label className="font-sans mx-4 mb-2 text-sm text-red-500">{emailError}</label>
@@ -101,7 +163,7 @@ export default function Home() {
               <button type="submit" className={(signInEmail === "" || signInPassword === "") ? "font-sans rounded-lg mt-4 mx-4 text-white text-xl bg-gray-400 h-10 hover:cursor-not-allowed" : "font-sans rounded-lg mt-4 mx-4 text-white text-xl bg-black h-10 hover:cursor-pointer"}>Sign In</button>
             </div>
           </form>
-          <button onClick={handleForgotPassword} className="ml-45 md:ml-85 font-sans my-2 mx-4 text-sm md:text-md text-red-500 font-semibold hover:cursor-pointer">Forgot Password?</button>
+          <button onClick={() => handleForgotPassword(signInEmail)} className="ml-45 md:ml-85 font-sans my-2 mx-4 text-sm md:text-md text-red-500 font-semibold hover:cursor-pointer">Forgot Password?</button>
           <div className="flex flex-row justify-center">
             <p className="select-none font-sans md:mx-4 mb-2 p-1 text-sm md:text-lg">New to SASTRA CareerHub?</p>
             <button onClick={handleSignUpClick} className="font-sans rounded-lg mb-2 text-sm md:text-lg font-semibold p-1 hover:bg-black hover:text-white hover:cursor-pointer transition duration-300 ease-in-out">Sign Up</button>
@@ -115,7 +177,7 @@ export default function Home() {
           <h1 className="select-none flex justify-center font-sans font-semibold text-2xl pt-2">Sign Up</h1>
           <h1 className="select-none flex justify-center mx-2 md:mx-0 font-sans text-sm md:text-lg text-gray-600 pb-2 italic">Streamline Your Journey to Success</h1>
           <hr className="text-gray-400"></hr>
-          <form>
+          <form onSubmit={(e) => {e.preventDefault();handleSignUp(signUpName,signUpEmail,signUpPassword)}}>
             <div className="flex flex-col">
               <input value={signUpName} onChange={(e) => setSignUpName((e.target.value).toUpperCase())} required className="font-sans p-2 rounded-lg m-4 border border-gray-400 h-10" type="text" placeholder="Name"/>
               <input value={signUpEmail} onChange={(e) => {setSignUpEmail(e.target.value);checkEmail(e.target.value)}}required className="font-sans p-2 rounded-lg mx-4 border border-gray-400 h-10" type="email" placeholder="SASTRA Email"/>
