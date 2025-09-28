@@ -3,7 +3,9 @@
 export default function HOME(){
     return(
         <>
-            Sairam
+            <div className="relative bg-gray-100 min-h-screen md:bg-gray-100">
+                Dashboard
+            </div>
         </>
     );
 }
