@@ -5,7 +5,8 @@
     import { useEffect, useState } from "react";
     import { auth } from "../_util/config";
     import { useRouter } from "next/navigation";
-import { FiExternalLink } from "react-icons/fi";
+    import NavBar from "../NavBar";
+    import { FiExternalLink } from "react-icons/fi";
 
     export default function HOME(){
 
@@ -73,26 +74,7 @@ import { FiExternalLink } from "react-icons/fi";
         return(
             <>
                 <div className="relative bg-gray-100 py-5 min-h-screen md:bg-gray-100">
-                    <div className="mx-auto bg-white p-2 rounded-xl shadow-xl w-75 md:w-190 lg:w-250">
-                        <div className="flex flex-row justify-between">
-                            <div className="flex flex-row justify-left items-center">
-                                <Image onClick={handleLogoClick} className="hover:cursor-pointer" src={"/logo.png"} width={60} height={20} alt="Logo"></Image>
-                                <div className="flex flex-col">
-                                    <div className="select-none font-sans font-bold text-lg md:text-2xl">Welcome, {username}</div>
-                                    <div className="select-none font-sans font-semibold text-sm md:text-sm">{email}</div>
-                                </div>
-                            </div>
-                            <div className="flex flex-col md:flex-row justify-between items-center md:space-x-6">
-                                <div className="bg-gray-200 rounded-lg shadow-3xl p-2 mb-2 md:mb-0">
-                                    {darkMode && <Image onClick={handleLightMode} className="cursor-pointer" src={"/sun.png"} width={28} height={20} alt="light mode"></Image>}
-                                    {!darkMode && <Image onClick={handleDarkMode} className="cursor-pointer" src={"/moon.png"} width={28} height={20} alt="dark mode"></Image> }
-                                </div>
-                                <div  className="bg-gray-200 rounded-lg shadow-3xl p-1 hover:cusror-pointer">
-                                    <Image onClick={handleLogout} src="/logout.png" width={35} height={20} alt="logout"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <NavBar username={username} email={email} darkMode={darkMode} handleLogoClick={handleLogoClick} handleDarkMode={handleDarkMode} handleLightMode={handleLightMode} handleLogout={handleLogout}></NavBar>
                     <div className="flex md:flex-row flex-col justify-center">
                         <div className="mx-auto md:ml-1 lg:ml-0 lg:mx-0 my-10 lg:my-15 p-3 bg-white rounded-2xl shadow-gray-500 shadow-2xl w-75 md:w-60 hover:scale-105 transition duration-300">
                             <Image className="mx-auto rounded-xl" src={"/resources.jpg"} width={360} height={360} alt="resources"></Image>

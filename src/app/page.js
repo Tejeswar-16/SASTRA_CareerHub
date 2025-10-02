@@ -1,9 +1,12 @@
 "use client"
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import React from 'react'
-
 const page = () => {
+
+  const router = useRouter();
+
   return (
     <div className='min-h-screen flex flex-col items-center bg-gray-100'>
       <Image className="mt-12 mb-12" src="/logo.png" width={200} height={50} alt="Logo"></Image>
@@ -19,7 +22,7 @@ const page = () => {
           <h3 className='text-gray-500 mb-6'>
             Easily manage all placement drives, internship postings, and prepation updates in one place
           </h3>
-          <Link href={"/adminlogin"} className='w-full bg-gray-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-black hover:transition duration-300 mb-3'><button>Login</button></Link>
+          <button onClick={() => router.push("/adminlogin")} className='w-full bg-gray-600 text-white font-medium py-2 px-4 rounded-lg hover:cursor-pointer hover:bg-black hover:transition duration-300 mb-3'>Login</button>
         </div>
 
         {/* Student Section - Right */}
@@ -30,7 +33,7 @@ const page = () => {
           <h3 className='text-gray-500 mb-6'>
             One platform for DSA, aptitude, career prepation, internships, and placements.
           </h3>
-          <Link href={"/studentlogin"} className='w-full bg-gray-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-black hover:transition duration-300 mb-3'><button>Login</button></Link>
+          <button onClick={() => router.push("/studentlogin")} className='w-full bg-gray-600 text-white font-medium py-2 px-4 rounded-lg hover:cursor-pointer hover:bg-black hover:transition duration-300 mb-3'>Login</button>
         </div>
       </div>
     </div>

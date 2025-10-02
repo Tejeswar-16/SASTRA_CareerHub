@@ -4,8 +4,9 @@ import { auth, db } from "@/app/_util/config";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { collection, getDocs, query } from "firebase/firestore";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import NavBar from "../../NavBar"
 
 export default function Home(){
 
@@ -18,6 +19,7 @@ export default function Home(){
     const [searchResource,setSearchResource] = useState("");
 
     const router = useRouter();
+    const params = useParams();
 
     useEffect(() => {
         onAuthStateChanged(auth,(user) => {
@@ -98,6 +100,16 @@ export default function Home(){
         fetchData();
     },[clicked,searchResource]);
 
+    function handleOpen(topic){
+        let Topic = "";
+        for (let i=0;i<topic.length;i++){
+            if (topic[i] !== " "){
+                Topic += topic[i];
+            }
+        }
+        router.push("/"+params.registerNumber+"/resources/"+Topic.toLowerCase());
+    }
+
     function handleDarkMode(){
         setDarkMode(true);
         document.documentElement.classList.add('dark')
@@ -111,26 +123,7 @@ export default function Home(){
     return(
         <>
             <div className="relative bg-gray-100 py-5 min-h-screen md:bg-gray-100">
-                <div className="mx-auto bg-white p-2 rounded-xl shadow-xl w-75 md:w-190 lg:w-250">
-                    <div className="flex flex-row justify-between">
-                        <div className="flex flex-row justify-left items-center">
-                            <Image onClick={handleLogoClick} className="hover:cursor-pointer" src={"/logo.png"} width={60} height={20} alt="Logo"></Image>
-                            <div className="flex flex-col">
-                                <div className="select-none font-sans font-bold text-lg md:text-2xl">Welcome, {username}</div>
-                                <div className="select-none font-sans font-semibold text-sm md:text-sm">{email}</div>
-                            </div>
-                        </div>
-                        <div className="flex flex-col md:flex-row justify-between items-center md:space-x-6">
-                            <div className="bg-gray-200 rounded-lg shadow-3xl p-2 mb-2 md:mb-0">
-                                {darkMode && <Image onClick={handleLightMode} className="cursor-pointer" src={"/sun.png"} width={28} height={20} alt="light mode"></Image>}
-                                {!darkMode && <Image onClick={handleDarkMode} className="cursor-pointer" src={"/moon.png"} width={28} height={20} alt="dark mode"></Image> }
-                            </div>
-                            <div  className="bg-gray-200 rounded-lg shadow-3xl p-1 hover:cusror-pointer">
-                                <Image onClick={handleLogout} src="/logout.png" width={35} height={20} alt="logout"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <NavBar username={username} email={email} darkMode={darkMode} handleLogoClick={handleLogoClick} handleDarkMode={handleDarkMode} handleLightMode={handleLightMode} handleLogout={handleLogout}></NavBar>
                 <div className="select-none flex justify-center font-sans font-bold text-2xl md:text-3xl my-5">
                     📚Resources Hub
                 </div>
@@ -205,7 +198,7 @@ export default function Home(){
                                             <div className="select-none font-sans">
                                                 {resource.description}
                                             </div>
-                                            <div className="mx-auto select-none font-sans font-semibold bg-green-300 rounded-xl shadow-xl p-2 w-14 cursor-pointer">Open</div>
+                                            <div onClick={() => handleOpen(resource.topic)} className="mx-auto select-none font-sans font-semibold bg-green-300 rounded-xl shadow-xl p-2 w-14 cursor-pointer">Open</div>
                                         </div>    
                                     ))
                                 } 
