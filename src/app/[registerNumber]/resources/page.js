@@ -14,6 +14,8 @@ export default function Home(){
     const [darkMode,setDarkMode] = useState(false);
     const [clicked,setClicked] = useState([true,false,false,false,false,false,false,false]);
     const [resource,setResource] = useState([]);
+    const [loading,setLoading] = useState(false);
+    const [searchResource,setSearchResource] = useState("");
 
     const router = useRouter();
 
@@ -36,7 +38,7 @@ export default function Home(){
     async function handleLogout(){
         try{
             await signOut(auth);
-            router.push("/studentLogin");
+            router.push("/studentlogin");
         }
         catch(error){
             console.log(error.message);
@@ -56,15 +58,24 @@ export default function Home(){
 
     useEffect(() => {
         async function fetchData(){
+            setLoading(true);
             const q = query(
                 collection(db,"resources")
             );
             const querySnapshot = await getDocs(q);
             const data = querySnapshot.docs.map((doc) => doc.data());
-            setResource(data);
+
+            let filteredData = data;
+            
+            if (searchResource !== ""){
+                filteredData = filteredData.filter((fd) => ((fd.topic).toLowerCase()).startsWith(searchResource.toLowerCase()));
+            }
+
+            setResource(filteredData);
+            setLoading(false);
         }
         fetchData();
-    });
+    },[searchResource]);
 
     function handleDarkMode(){
         setDarkMode(true);
@@ -134,9 +145,20 @@ export default function Home(){
                             </div>
                         </div>
                     </div>
+
+                    {loading && 
+                        <>
+                           <div className="fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center">
+                                <div className="mx-auto font-mono font-bold text-3xl">
+                                    Loading...
+                                </div>
+                            </div>
+                        </>
+                    }
+
                     <div className="bg-white rounded-xl shadow-xl w-165 h-150">
                         <div className="bg-gray-100 rounded-xl shadow-xl px-4 py-2">
-                            <input className="font-sans border rounded-xl w-153 h-10 p-2" type="search" placeholder="Search topics..."></input>
+                            <input value={searchResource} onChange={(e) => setSearchResource(e.target.value)} className="font-sans border rounded-xl w-153 h-10 p-2" type="search" placeholder="Search topics..."></input>
                             <div className="flex flex-row justify-between items-center">
                                 <div onClick={() => handleChipsClick(0)} className={`select-none font-sans border-gray-300 rounded-2xl ${clicked[0] ? "bg-yellow-200" : ""} p-2 mt-2 hover:cursor-pointer`}>All</div> 
                                 <div onClick={() => handleChipsClick(1)} className={`select-none font-sans border-gray-300 rounded-2xl ${clicked[1] ? "bg-yellow-200" : ""} p-2 mt-2 hover:cursor-pointer`}>DSA</div>
