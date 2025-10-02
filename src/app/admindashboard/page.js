@@ -8,7 +8,8 @@ import { FiExternalLink } from 'react-icons/fi'
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from '../_util/config'
 export default function Home(){
-    const [adminName,setAdminName] = useState("Admin")
+    const [adminName,setAdminName] = useState("")
+    const [adminEmail,setAdminEmail] = useState("")
     const [isdark,setIsDark] = useState(false)
     const router = useRouter()
     const handleLogoClick = () => {
@@ -28,8 +29,10 @@ export default function Home(){
     }
     useEffect(() => {
         onAuthStateChanged(auth , (admin) => {
-            if(admin)
+            if(admin){
+                setAdminEmail(admin.email)
                 setAdminName(admin.displayName)
+            }
             else
                 router.push("/")
         })
@@ -55,6 +58,7 @@ export default function Home(){
                                         <Image onClick={handleLogoClick} className="hover:cursor-pointer" src={"/logo.png"} width={60} height={20} alt="Logo"></Image>
                                         <div className="flex flex-col md:flex-row">
                                             <div className="select-none font-sans font-bold text-md md:text-3xl">Welcome, {adminName}</div>
+                                            <div className="select-none font-sans font-bold text-md md:text-xl">{adminEmail}</div>
                                         </div>
                                     </div>
                                     <div className="flex flex-row md:flex-row justify-right items-center md:space-x-6">
