@@ -93,7 +93,6 @@ export default function Home(){
             else if (clicked[7]){
                 filteredData = filteredData.filter((fd) => (fd.topic === "Aptitude"))
             }
-
             setResource(filteredData);
             setLoading(false);
         }

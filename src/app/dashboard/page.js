@@ -85,7 +85,7 @@
 
                         <div className="mx-auto md:mx-0 md:my-10 md:ml-1 lg:ml-4 mb-10 lg:my-15 p-3 bg-white rounded-2xl shadow-gray-500 shadow-2xl w-75 md:w-60 hover:scale-105 transition duration-300">
                             <Image className="mx-auto rounded-xl" src={"/company.jpg"} width={360} height={360} alt="resources"></Image>
-                            <div className="select-none text-center font-sans mt-2 font-bold text-xl">Comapany Tracker</div>
+                            <div className="select-none text-center font-sans mt-2 font-bold text-xl">Company Tracker</div>
                             <div className="select-none text-center italic font-sans text-md">Stay informed about SASTRA placements, internship openings, and company updates to plan your future</div>
                             <button onClick={handleCompanyExplore} className="flex flex-row px-5 py-2 items-center cursor-pointer bg-[#1a73e8] rounded-3xl text-white font-sans mx-auto mt-11 transition-colors  duration-300 ease-in-out hover:bg-[#0e53ad]">Visit <FiExternalLink className="ml-2"/></button>
                         </div>
