@@ -117,7 +117,7 @@ export default function AdminLogin(){
                             <input onChange={(e) => {setSignInEmail(e.target.value);checkEmail(e.target.value)}} required className="font-sans p-2 rounded-lg mx-4 mt-4 mb-2 border border-gray-400 h-10" type="email" placeholder="Email"/>
                             <label className="font-sans mx-4 mb-2 text-sm text-red-500">{emailError}</label>
                             <input onChange={(e) => setSignInPassword(e.target.value)} required className="font-sans p-2 rounded-lg mx-4 border border-gray-400 h-10" type="password" placeholder="Password"/>
-                            <button type="submit" className={(signInEmail === "" || signInPassword === "") ? "font-sans rounded-lg mt-4 mx-4 text-white text-xl bg-gray-400 h-10 hover:cursor-not-allowed" : "font-sans rounded-lg mt-4 mx-4 text-white text-xl bg-black h-10 hover:cursor-pointer"}>Sign In</button>
+                            <button type="submit" className={(signInEmail === "" || signInPassword === "") ? "font-sans rounded-lg mt-4 mx-4 text-white text-xl bg-gray-400 h-10 hover:cursor-pointer" : "font-sans rounded-lg mt-4 mx-4 text-white text-xl bg-black h-10 hover:cursor-pointer"}>Sign In</button>
                             </div>
                         </form>
                         <button onClick={() => handleForgotPassword(signInEmail)} className="ml-45 md:ml-85 font-sans my-2 mx-4 text-sm md:text-md text-red-500 font-semibold hover:cursor-pointer">Forgot Password?</button>
