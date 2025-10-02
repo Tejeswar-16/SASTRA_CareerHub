@@ -17,6 +17,7 @@ export default function Home() {
   const [signUpConfirmPassword,setSignUpConfirmPassword] = useState("");
   const [pwdError,setPwdError] = useState("");
   const [emailError,setEmailError] = useState("");
+  const [loading,setLoading] = useState(false);
 
   //Router for navigation
   const router = useRouter();
@@ -109,6 +110,7 @@ export default function Home() {
 
   //Sign In with firebase
   async function handleSignIn(email,password){
+    setLoading(true);
     try
     {
       await signInWithEmailAndPassword(auth,email,password);
@@ -118,6 +120,9 @@ export default function Home() {
     {
       if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password" || error.code === "auth/invalid-credential")
         alert("Hey! Invalid Email or Password");
+    }
+    finally{
+      setLoading(false);
     }
   }
 
@@ -194,6 +199,16 @@ export default function Home() {
           </div>
         </div>
       }
+
+      {
+        loading && 
+          <div className="fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center">
+            <div className="mx-auto font-mono font-bold text-2xl text-white">
+              Loading...
+            </div>
+          </div>
+      }
+
     </div>
   );
 }
