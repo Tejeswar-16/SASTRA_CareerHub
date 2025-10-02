@@ -70,12 +70,33 @@ export default function Home(){
             if (searchResource !== ""){
                 filteredData = filteredData.filter((fd) => ((fd.topic).toLowerCase()).startsWith(searchResource.toLowerCase()));
             }
+            else if (clicked[1]){
+                filteredData = filteredData.filter((fd) => (fd.topic === "Arrays" || fd.topic === "Strings" || fd.topic === "Dynamic Programming" || fd.topic === "Trees" || fd.topic === "Graphs"))
+            }
+            else if (clicked[2]){
+                filteredData = filteredData.filter((fd) => (fd.topic === "Object Oriented Programming"))
+            }
+            else if (clicked[3]){
+                filteredData = filteredData.filter((fd) => (fd.topic === "DBMS"))
+            }
+            else if (clicked[4]){
+                filteredData = filteredData.filter((fd) => (fd.topic === "Operating Systems"))
+            }
+            else if (clicked[5]){
+                filteredData = filteredData.filter((fd) => (fd.topic === "Computer Networks"))
+            }
+            else if (clicked[6]){
+                filteredData = filteredData.filter((fd) => (fd.topic === "HR"))
+            }
+            else if (clicked[7]){
+                filteredData = filteredData.filter((fd) => (fd.topic === "Aptitude"))
+            }
 
             setResource(filteredData);
             setLoading(false);
         }
         fetchData();
-    },[searchResource]);
+    },[clicked,searchResource]);
 
     function handleDarkMode(){
         setDarkMode(true);
@@ -110,32 +131,32 @@ export default function Home(){
                         </div>
                     </div>
                 </div>
-                <div className="select-none flex justify-center font-sans font-bold text-3xl my-5">
+                <div className="select-none flex justify-center font-sans font-bold text-2xl md:text-3xl my-5">
                     📚Resources Hub
                 </div>
-                <div className="flex flex-row justify-center">
-                    <div className="bg-white rounded-xl shadow-xl p-4 w-80 mr-5">
+                <div className="flex flex-col lg:flex-row justify-center">
+                    <div className="mx-auto lg:mx-0 bg-white rounded-xl shadow-xl p-4 w-75 md:w-190 lg:w-80 lg:mr-5 mb-5 md:mb-0">
                         <div className="select-none font-sans font-bold text-xl">
                             Browse Categories
                         </div>
-                        <div className="flex flex-col">
-                            <div className="bg-gray-100 rounded-xl shadow-2xl p-2 mt-2 hover:bg-gray-200 transition duration-300">
+                        <div className="flex flex-col md:flex-row lg:flex-col">
+                            <div className="bg-gray-100 rounded-xl shadow-2xl p-2 mt-2 mr-0 lg:mr-0 md:mr-2 hover:bg-gray-200 transition duration-300">
                                 <div className="select-none font-sans text-xl font-semibold">DSA</div>
                                 <div className="select-none font-sans text-sm">Topic-wise problems and patterns for online assesment and more</div>
                             </div>
-                            <div className="bg-gray-100 rounded-xl shadow-2xl p-2 mt-2 hover:bg-gray-200 transition duration-300">   
+                            <div className="bg-gray-100 rounded-xl shadow-2xl p-2 mt-2 mr-0 lg:mr-0 md:mr-2 hover:bg-gray-200 transition duration-300">   
                                 <div className="select-none font-sans text-xl font-semibold">OOPs</div>
                                 <div className="select-none font-sans text-sm">Key concepts, interview questions and more</div>
                             </div>
-                            <div className="bg-gray-100 rounded-xl shadow-2xl p-2 mt-2 hover:bg-gray-200 transition duration-300">
+                            <div className="bg-gray-100 rounded-xl shadow-2xl p-2 mt-2 mr-0 lg:mr-0 md:mr-2 hover:bg-gray-200 transition duration-300">
                                 <div className="select-none font-sans text-xl font-semibold">OS</div>
                                 <div className="select-none font-sans text-sm">Scheduling, deadlocks, core theory and more</div>
                             </div>
-                            <div className="bg-gray-100 rounded-xl shadow-2xl p-2 mt-2 hover:bg-gray-200 transition duration-300">
+                            <div className="bg-gray-100 rounded-xl shadow-2xl p-2 mt-2 mr-0 lg:mr-0 md:mr-2 hover:bg-gray-200 transition duration-300">
                                 <div className="select-none font-sans text-xl font-semibold">CN</div>
                                 <div className="select-none font-sans text-sm">Protocols, TCP/IP, key diagrams and more</div>
                             </div>
-                            <div className="bg-gray-100 rounded-xl shadow-2xl p-2 mt-2 hover:bg-gray-200 transition duration-300">
+                            <div className="bg-gray-100 rounded-xl shadow-2xl p-2 mt-2 mr-0 lg:mr-0 md:mr-2 hover:bg-gray-200 transition duration-300">
                                 <div className="select-none font-sans text-xl font-semibold">Aptitude</div>
                                 <div className="select-none font-sans text-sm">Topic-wise problems and patterns for online assesment</div>
                             </div>
@@ -156,10 +177,10 @@ export default function Home(){
                         </>
                     }
 
-                    <div className="bg-white rounded-xl shadow-xl w-165 h-150">
+                    <div className="mx-auto lg:mx-0 mt-0 md:mt-5 lg:mt-0 bg-white rounded-xl shadow-xl w-75 md:w-190 lg:w-165 md:h-150">
                         <div className="bg-gray-100 rounded-xl shadow-xl px-4 py-2">
-                            <input value={searchResource} onChange={(e) => setSearchResource(e.target.value)} className="font-sans border rounded-xl w-153 h-10 p-2" type="search" placeholder="Search topics..."></input>
-                            <div className="flex flex-row justify-between items-center">
+                            <input value={searchResource} onChange={(e) => setSearchResource(e.target.value)} className="font-sans border rounded-xl w-67 md:w-182 lg:w-153 h-10 p-2" type="search" placeholder="Search topics..."></input>
+                            <div className="flex flex-wrap md:flex-row justify-between items-center">
                                 <div onClick={() => handleChipsClick(0)} className={`select-none font-sans border-gray-300 rounded-2xl ${clicked[0] ? "bg-yellow-200" : ""} p-2 mt-2 hover:cursor-pointer`}>All</div> 
                                 <div onClick={() => handleChipsClick(1)} className={`select-none font-sans border-gray-300 rounded-2xl ${clicked[1] ? "bg-yellow-200" : ""} p-2 mt-2 hover:cursor-pointer`}>DSA</div>
                                 <div onClick={() => handleChipsClick(2)} className={`select-none font-sans border-gray-300 rounded-2xl ${clicked[2] ? "bg-yellow-200" : ""} p-2 mt-2 hover:cursor-pointer`}>OOPs</div>
@@ -173,11 +194,11 @@ export default function Home(){
                         <div className="select-none font-sans font-bold text-xl px-4 my-4">
                             Resources
                         </div>
-                        <div className="bg-white rounded-xl p-4 w-165 h-100 overflow-hidden overflow-y-auto">
-                            <div className="flex flex-wrap justify-between">
+                        <div className="mx- 0 lg:mx-0 md:mx-auto bg-white rounded-xl p-4 md:w-165 h-100 overflow-hidden overflow-y-auto">
+                            <div className="flex md:flex-wrap md:flex-row flex-col justify-between">
                                 {
                                     resource.map((resource,index) => (
-                                        <div key={index} className="bg-gray-100 rounded-xl shadow-xl p-2 w-[48%] h-45 mb-4 border border-gray-200">
+                                        <div key={index} className="mx-auto lg:mx-0 bg-gray-100 rounded-xl shadow-xl p-2 w-65 md:w-[48%] mb-4 border border-gray-200">
                                             <div className="select-none font-sans font-bold text-lg">
                                                 {resource.topic}
                                             </div>
