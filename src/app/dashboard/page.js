@@ -92,7 +92,7 @@
                             </div>
                         </div>
                     </div>
-                    <div className="flex md:flex-row flex-col justify-center">
+                    <div className="flex md:flex-row flex-col justify-center gap-y-7">
                         <div className="mx-auto md:ml-1 lg:ml-0 lg:mx-0 my-10 lg:my-15 p-3 bg-white rounded-2xl shadow-gray-500 shadow-2xl w-75 md:w-60 hover:scale-105 transition duration-300">
                             <Image className="mx-auto rounded-xl" src={"/resources.jpg"} width={360} height={360} alt="resources"></Image>
                             <div className="select-none text-center font-sans mt-2 font-bold text-xl">Resource Library</div>
@@ -102,7 +102,7 @@
 
                         <div className="mx-auto md:mx-0 md:my-10 md:ml-1 lg:ml-4 mb-10 lg:my-15 p-3 bg-white rounded-2xl shadow-gray-500 shadow-2xl w-75 md:w-60 hover:scale-105 transition duration-300">
                             <Image className="mx-auto rounded-xl" src={"/company.jpg"} width={360} height={360} alt="resources"></Image>
-                            <div className="select-none text-center font-sans mt-2 font-bold text-xl">Comapany Tracker</div>
+                            <div className="select-none text-center font-sans mt-2 font-bold text-xl">Company Tracker</div>
                             <div className="select-none text-center italic font-sans text-md">Stay informed about SASTRA placements, internship openings, and company updates to plan your future</div>
                             <div onClick={handleCompanyExplore} className="font-sans flex justify-center items-center mx-auto mt-9 font-bold bg-yellow-400 text-blue-900 w-30 rounded-xl shadow-xl hover:cursor-pointer p-2">Explore🔍</div>
                         </div>
