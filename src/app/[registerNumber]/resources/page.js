@@ -70,7 +70,7 @@ export default function Home(){
             let filteredData = data;
             
             if (searchResource !== ""){
-                filteredData = filteredData.filter((fd) => ((fd.topic).toLowerCase()).startsWith(searchResource.toLowerCase()));
+                filteredData = filteredData.filter((fd) => ((fd.topic).toLowerCase()).includes(searchResource.toLowerCase()));
             }
             else if (clicked[1]){
                 filteredData = filteredData.filter((fd) => (fd.topic === "Arrays" || fd.topic === "Strings" || fd.topic === "Dynamic Programming" || fd.topic === "Trees" || fd.topic === "Graphs"))
@@ -163,7 +163,7 @@ export default function Home(){
                         <>
                            <div className="fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center">
                                 <div className="mx-auto font-mono font-bold text-3xl">
-                                    Loading...
+                                    <Image src={"/loading.gif"} width={200} height={20} alt="Loading..."></Image>
                                 </div>
                             </div>
                         </>

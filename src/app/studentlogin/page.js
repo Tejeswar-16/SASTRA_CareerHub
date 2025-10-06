@@ -204,7 +204,7 @@ export default function Home() {
         loading && 
           <div className="fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center">
             <div className="mx-auto font-mono font-bold text-2xl text-white">
-              Loading...
+              <Image src={"/loading.gif"} width={200} height={20} alt="Loading..."></Image>
             </div>
           </div>
       }
