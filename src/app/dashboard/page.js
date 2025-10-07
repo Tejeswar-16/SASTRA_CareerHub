@@ -12,7 +12,6 @@
 
         const [username,setUsername] = useState("");
         const [email,setEmail] = useState("");
-        const [darkMode,setDarkMode] = useState(false);
 
         const router = useRouter();
 
@@ -50,7 +49,7 @@
         }
 
         function handleCompanyExplore(){
-
+            router.push("/"+getRegNo()+"/companytracker")
         }
 
         function handleProgressExplore(){
@@ -61,20 +60,10 @@
 
         }
 
-        function handleDarkMode(){
-            setDarkMode(true);
-            document.documentElement.classList.add('dark')
-        }
-
-        function handleLightMode(){
-            setDarkMode(false);
-            document.documentElement.classList.remove('dark')
-        }
-
         return(
             <>
                 <div className="relative bg-gray-100 py-5 min-h-screen md:bg-gray-100">
-                    <NavBar username={username} email={email} darkMode={darkMode} handleLogoClick={handleLogoClick} handleDarkMode={handleDarkMode} handleLightMode={handleLightMode} handleLogout={handleLogout}></NavBar>
+                    <NavBar username={username} email={email} handleLogoClick={handleLogoClick} handleLogout={handleLogout}></NavBar>
                     <div className="flex md:flex-row flex-col justify-center">
                         <div className="mx-auto md:ml-1 lg:ml-0 lg:mx-0 my-10 lg:my-15 p-3 bg-white rounded-2xl shadow-gray-500 shadow-2xl w-75 md:w-60 hover:scale-105 transition duration-300">
                             <Image className="mx-auto rounded-xl" src={"/resources.jpg"} width={360} height={360} alt="resources"></Image>

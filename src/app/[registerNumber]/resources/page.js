@@ -122,7 +122,7 @@ export default function Home(){
     return(
         <>
             <div className="relative bg-gray-100 py-5 min-h-screen md:bg-gray-100">
-                <NavBar username={username} email={email} darkMode={darkMode} handleLogoClick={handleLogoClick} handleDarkMode={handleDarkMode} handleLightMode={handleLightMode} handleLogout={handleLogout}></NavBar>
+                <NavBar username={username} email={email} handleLogoClick={handleLogoClick} handleLogout={handleLogout}></NavBar>
                 <div className="select-none flex justify-center font-sans font-bold text-2xl md:text-3xl my-5">
                     📚Resources Hub
                 </div>
