@@ -61,9 +61,9 @@ export default function Home(){
                                             <div className="select-none font-sans font-semibold text-md md:text-sm">{adminEmail}</div>
                                         </div>
                                     </div>
-                                    <div className="flex flex-col md:flex-row justify-right items-center md:space-x-6">
-                                        {isdark ? <button title="Toggle mode" className="rounded-[10px] mx-3 px-5 py-2 cursor-pointer transform transition-transform duration-400 hover:scale-130 hover:rotate-360" onClick={() => handleToggleModeClick()}><MdLightMode size={30} color="white"/></button> : <button title="Toggle mode" className=" rounded-[10px] mx-3 px-5 py-2 cursor-pointer transform transition-transform duration-300 hover:scale-130 hover:rotate-360" onClick={() => handleToggleModeClick()}><MdDarkMode size={30} color="black"/></button>}
-                                        <button title="Logout" onClick={handleLogout} className="mr-2 transform transition-transform duration-400 cursor-pointer hover:translate-x-2 hover:scale-110"><FiLogOut size={30} color={isdark ? "white" : "black"}/></button>
+                                    <div className="flex flex-col md:flex-row justify-right items-center md:space-x-6 pl-10">
+                                        {isdark ? <div title="Toggle mode" className="rounded-[10px] mx-3 px-5 py-2 cursor-pointer transform transition-transform duration-400 hover:scale-130 hover:rotate-360" onClick={() => handleToggleModeClick()}><MdLightMode size={30} color="white"/></div> : <div title="Toggle mode" className=" rounded-[10px] mx-3 px-5 py-2 cursor-pointer transform transition-transform duration-300 hover:scale-130 hover:rotate-360" onClick={() => handleToggleModeClick()}><MdDarkMode size={30} color="black"/></div>}
+                                        <div title="Logout" onClick={handleLogout} className="mr-2 transform transition-transform duration-400 cursor-pointer hover:translate-x-2 hover:scale-110 text-center flex flex-row justify-center pl-4"><FiLogOut size={30} color={isdark ? "white" : "black"}/></div>
                                     </div>
                                 </div>
                             </div>
@@ -72,73 +72,31 @@ export default function Home(){
                                     <Image className="mx-auto rounded-xl" src={"/announcements.jpg"} width={360} height={360} alt="Announcements Management"></Image>
                                     <div className="select-none text-center font-sans mt-2 font-bold text-xl">Announcements Management</div>
                                     <div className="select-none text-center italic font-sans text-md mt-2">Create, update, or remove job and internship postings with complete details to maintain accurate listings.</div>
-                                    <button className="flex flex-row px-5 py-2 items-center cursor-pointer bg-[#1a73e8] rounded-3xl text-white font-sans mx-auto transition-colors  duration-300 ease-in-out hover:bg-[#0e53ad] mt-auto">Visit <FiExternalLink className="ml-2"/></button>
+                                    <button onClick={handleAnnouncementsManagementClick} className="flex flex-row px-5 py-2 items-center cursor-pointer bg-[#1a73e8] rounded-3xl text-white font-sans mx-auto transition-colors  duration-300 ease-in-out hover:bg-[#0e53ad] mt-auto">Visit <FiExternalLink className="ml-2"/></button>
                                 </div>
             
                                 <div className="mx-auto md:ml-1 lg:ml-0 lg:mx-0 my-10 lg:my-15 p-3 bg-white rounded-2xl shadow-gray-500 shadow-2xl w-75 md:w-60 hover:scale-105 transition duration-300 flex flex-col">
                                     <Image className="mx-auto rounded-xl" src={"/track_job.jpg"} width={360} height={360} alt="Application Tracking"></Image>
                                     <div className="select-none text-center font-sans mt-2 font-bold text-xl">Application Tracking</div>
                                     <div className="select-none text-center italic font-sans text-md mt-2">Track student applications with status updates, and generate reports to analyze trends and engagement.</div>
-                                    <button className="flex flex-row px-5 py-2 items-center cursor-pointer bg-[#1a73e8] rounded-3xl text-white font-sans mx-auto mt-5 transition-colors  duration-300 ease-in-out hover:bg-[#0e53ad] mt-auto">Visit <FiExternalLink className="ml-2"/></button>
+                                    <button onClick={handleApplicationTrackingClick} className="flex flex-row px-5 py-2 items-center cursor-pointer bg-[#1a73e8] rounded-3xl text-white font-sans mx-auto mt-5 transition-colors  duration-300 ease-in-out hover:bg-[#0e53ad] mt-auto">Visit <FiExternalLink className="ml-2"/></button>
                                 </div>
             
                                 <div className="mx-auto md:ml-1 lg:ml-0 lg:mx-0 my-10 lg:my-15 p-3 bg-white rounded-2xl shadow-gray-500 shadow-2xl w-75 md:w-60 hover:scale-105 transition duration-300 flex flex-col">
                                     <Image className="mx-auto rounded-xl" src={"/contentresources.jpg"} width={360} height={360} alt="Content & Resource Management"></Image>
                                     <div className="select-none text-center font-sans mt-2 font-bold text-xl">Content & Resource Management</div>
                                     <div className="select-none text-center italic font-sans text-md mt-2">Upload, organize, and manage career resources to provide students with a centralized hub for learning and preparation.</div>
-                                    <button className="flex flex-row px-5 py-2 items-center cursor-pointer bg-[#1a73e8] rounded-3xl text-white font-sans mx-auto mt-5 transition-colors  duration-300 ease-in-out hover:bg-[#0e53ad] mt-auto">Visit <FiExternalLink className="ml-2"/></button>
+                                    <button onClick={handleContentAndResourceManagementClick} className="flex flex-row px-5 py-2 items-center cursor-pointer bg-[#1a73e8] rounded-3xl text-white font-sans mx-auto mt-5 transition-colors  duration-300 ease-in-out hover:bg-[#0e53ad] mt-auto">Visit <FiExternalLink className="ml-2"/></button>
                                 </div>
             
                                 <div className="mx-auto md:ml-1 lg:ml-0 lg:mx-0 my-10 lg:my-15 p-3 bg-white rounded-2xl shadow-gray-500 shadow-2xl w-75 md:w-60 hover:scale-105 transition duration-300 flex flex-col">
                                     <Image className="mx-auto rounded-xl" src={"/feedback.jpg"} width={360} height={360} alt="Feedback & Support"></Image>
                                     <div className="select-none text-center font-sans mt-2 font-bold text-xl">Feedback & Support</div>
                                     <div className="select-none text-center italic font-sans text-md mt-2">Manage and respond to student and recruiter feedback, complaints, and queries while tracking support tickets to enhance the platform experience.</div>
-                                    <button className="flex flex-row px-5 py-2 items-center cursor-pointer bg-[#1a73e8] rounded-3xl text-white font-sans mx-auto mt-5 transition-colors  duration-300 ease-in-out hover:bg-[#0e53ad] mt-auto">Visit <FiExternalLink className="ml-2"/></button>
+                                    <button onClick={handleFeedbackAndSupportClick} className="flex flex-row px-5 py-2 items-center cursor-pointer bg-[#1a73e8] rounded-3xl text-white font-sans mx-auto mt-5 transition-colors  duration-300 ease-in-out hover:bg-[#0e53ad] mt-auto">Visit <FiExternalLink className="ml-2"/></button>
                                 </div>
                             </div>
-                        </div>
+            </div>
         </>
     );
 }
-/*
-
-Core Features
-
-Create Announcements – Post new job openings, internships, workshops, and events.
-
-Edit / Delete Announcements – Modify or remove outdated announcements.
-
-Schedule Announcements – Set a future date/time for announcements to go live.
-
-Categorize Announcements – Organize by type (Jobs, Internships, Events).
-
-Highlight / Feature Announcements – Make important announcements stand out.
-
-User & Engagement Management
-
-View User Engagement – Track which announcements are viewed or clicked most.
-
-Send Notifications – Push browser or email notifications to users.
-
-Segmented Announcements – Target users based on location, field of study, or interests.
-
-Admin Management
-
-Manage Admin Accounts – Add, remove, or change permissions of other admins.
-
-Activity Logs – Track all admin actions (posted, edited, deleted announcements).
-
-Analytics & Reporting
-
-Dashboard Overview – Quick metrics: total announcements, upcoming, expired.
-
-Engagement Analytics – Number of clicks, views, or user interactions per announcement.
-
-Optional Enhancements
-
-Templates for Announcements – Predefined formats for job or internship posts.
-
-Archive Past Announcements – Maintain a record of all previous postings.
-
-Export Reports – Download data on announcements or user engagement for record-keeping.
-*/
