@@ -1,27 +1,34 @@
 "use client"
 
-import { auth } from "@/app/_util/config";
+import { auth, db } from "@/app/_util/config";
 import NavBar from "@/app/NavBar";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { useRouter } from "next/navigation";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import Image from "next/image";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Home(){
 
     const [name,setName] = useState("");
     const [email,setEmail] = useState("");
-    const [loading,setLoading] = useState(false);
     const [formName,setFormName] = useState("");
-    const [error,setError] = useState("");
     const [personalEmail,setPersonalEmail] = useState("");
     const [mobile,setMobile] = useState("");
+    const [gender,setGender] = useState("");
     const [dob,setDob] = useState("");
     const [tenth,setTenth] = useState("");
     const [twelfth,setTwelfth] = useState("");
     const [cgpa,setCgpa] = useState("");
     const [resume,setResume] = useState("");
+    const [mobileError,setMobileError] = useState("");
+    const [tenthError,setTenthError] = useState("");
+    const [twelfthError,setTwelfthError] = useState("");
+    const [cgpaError,setCgpaError] = useState("");
+    const [loading,setLoading] = useState(false);
 
     const router = useRouter();
+    const params = useParams();
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -51,8 +58,93 @@ export default function Home(){
         }
     }
 
-    function handleSubmit(){
+    function handleMobile(mobile){
+        let count = 0;
+        while (mobile !== 0){
+            mobile = Math.floor(mobile / 10);
+            count++;
+        }
+        if (count !== 10){
+            setMobileError("Invalid Mobile Number");
+        }
+        else{
+            setMobileError("");
+        }
+    }
 
+    function handleTenth(tenth){
+        if (Number(tenth) <= 0 || Number(tenth) > 100){
+            setTenthError("Invalid %")
+        }else{
+            setTenthError("");
+        }
+    }
+
+    function handleTwelfth(twelfth){
+        if (Number(twelfth) <= 0 || Number(twelfth) > 100){
+            setTwelfthError("Invalid %")
+        }else{
+            setTwelfthError("");
+        }
+    }
+
+    function handleCgpa(cgpa){
+        if (Number(cgpa) <= 0 || Number(cgpa) > 10){
+            setCgpaError("Invalid CGPA")
+        }else{
+            setCgpaError("");
+        }
+    }
+
+    async function handleSubmit(e){
+        e.preventDefault();
+
+        if (mobileError !== "")
+            return alert(mobileError);
+        if (tenthError !== "")
+            return alert(tenthError);
+        if (twelfthError !== "")   
+            return alert(twelfthError);
+        if (cgpaError !== "")
+            return alert(cgpaError)
+        try
+        {
+            setLoading(true);
+            const q = query(
+                collection(db,"applications"),
+                where("registerNo","==",getRegNo()),
+                where("company","==",params.company)
+            );
+            const querySnapshot = await getDocs(q);
+            if (querySnapshot.empty)
+            {
+                await addDoc(collection(db,"applications"),{
+                    company: params.company,
+                    name: formName,
+                    registerNo: getRegNo(),
+                    sastraEmail: email,
+                    personalEmail: personalEmail,
+                    mobile: mobile,
+                    gender: gender,
+                    dob: dob,
+                    tenth: tenth,
+                    twelfth: twelfth,
+                    cgpa: cgpa,
+                    timestamp: new Date()
+                });
+                setLoading(false);
+                alert("Thank you for registering. Your response has been submitted");
+                router.push("/"+params.registerNumber+"/companytracker");
+            }
+            else{
+                setLoading(false);
+                alert("Sorry! You have already registered for this position");
+                router.push("/"+params.registerNumber+"/companytracker");
+            }
+        }
+        catch (error){
+            console.log(error.message);
+        }
     }
 
     return (
@@ -60,6 +152,17 @@ export default function Home(){
             <div className="relative bg-gray-100 py-5 min-h-screen md:bg-gray-100">
                 <NavBar username={name} email={email} handleLogoClick={handleLogoClick} handleLogout={handleLogout}></NavBar>
                 <div className="mx-auto select-none font-sans bg-white rounded-xl shadow-2xl w-250 mt-5 p-4">
+                    
+                    {loading && 
+                        <>
+                           <div className="fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center">
+                                <div className="mx-auto font-mono font-bold text-3xl">
+                                    <Image src={"/loading.gif"} width={200} height={20} alt="Loading..."></Image>
+                                </div>
+                            </div>
+                        </>
+                    }
+                    
                     <form onSubmit={handleSubmit}>
                         <div className="bg-gray-100 rounded-xl shadow-xl shadow-gray-300 p-3">
                             <div className="font-sans text-xl">
@@ -89,13 +192,19 @@ export default function Home(){
                             <div className="font-sans text-xl">
                                 Mobile Number
                             </div>
-                            <input required className="select-none border mt-3 rounded-xl w-235 h-12 p-2 text-md" type="number" placeholder="Enter your mobile number"></input>
+                            <input required value={mobile} onChange={(e) => {setMobile(e.target.value);handleMobile(e.target.value)}} className="select-none border mt-3 rounded-xl w-235 h-12 p-2 text-md" type="number" placeholder="Enter your mobile number"></input>
+                            <p className="select-none font-sans text-red-500 mt-1">{mobileError}</p> 
                         </div>
                         <div className="bg-gray-100 rounded-xl mt-8 shadow-xl shadow-gray-300 p-3">
                             <div className="font-sans text-xl">
                                 Gender
                             </div>
-                            <input required className="select-none border mt-3 rounded-xl w-235 h-12 p-2 text-md" type="number" placeholder="Enter your mobile number"></input>
+                            <div className="flex flex-row">
+                                <input required value="Male" checked={gender === "Male"} onChange={(e) => setGender(e.target.value)} className="select-none border mt-3" type="radio" name="gender"></input>
+                                <p className="select-none font-sans mt-3 ml-1">Male</p>
+                                <input required value="Female" checked={gender === "Female"} onChange={(e) => setGender(e.target.value)} className="select-none border mt-3 ml-10" type="radio" name="gender"></input>
+                                <p className="select-none font-sans mt-3 ml-1">Female</p>
+                            </div>
                         </div>
                         <div className="bg-gray-100 rounded-xl mt-8 shadow-xl shadow-gray-300 p-3">
                             <div className="font-sans text-xl">
@@ -107,28 +216,31 @@ export default function Home(){
                             <div className="font-sans text-xl">
                                 Percentage scored in 10th grade
                             </div>
-                            <input required value={tenth} onChange={(e) => setTenth(e.target.value)} className="select-none border mt-3 rounded-xl w-235 h-12 p-2 text-md" type="number" max={100} placeholder="10th grade (%)"></input>
+                            <input required value={tenth} onChange={(e) => {setTenth(e.target.value);handleTenth(e.target.value)}} className="select-none border mt-3 rounded-xl w-235 h-12 p-2 text-md" type="text" placeholder="10th grade (%)"></input>
+                            <p className="select-none font-sans text-red-500 mt-1">{tenthError}</p> 
                         </div>
                         <div className="bg-gray-100 rounded-xl mt-8 shadow-xl shadow-gray-300 p-3">
                             <div className="font-sans text-xl">
                                 Percentage scored in 12th grade
                             </div>
-                            <input required value={twelfth} onChange={(e) => setTwelfth(e.target.value)} className="select-none border mt-3 rounded-xl w-235 h-12 p-2 text-md" type="number" max={100} placeholder="12th grade (%)"></input>
+                            <input required value={twelfth} onChange={(e) => {setTwelfth(e.target.value);handleTwelfth(e.target.value)}} className="select-none border mt-3 rounded-xl w-235 h-12 p-2 text-md" type="text" placeholder="12th grade (%)"></input>
+                            <p className="select-none font-sans text-red-500 mt-1">{twelfthError}</p> 
                         </div>
                         <div className="bg-gray-100 rounded-xl mt-8 shadow-xl shadow-gray-300 p-3">
                             <div className="font-sans text-xl">
                                 Cumulative Grade Point Average (CGPA)
                             </div>
-                            <input required value={cgpa} onChange={(e) => setCgpa(e.target.value)} className="select-none border mt-3 rounded-xl w-235 h-12 p-2 text-md" type="number" max={100} placeholder="CGPA"></input>
+                            <input required value={cgpa} onChange={(e) => {setCgpa(e.target.value);handleCgpa(e.target.value)}} className="select-none border mt-3 rounded-xl w-235 h-12 p-2 text-md" type="text" placeholder="CGPA"></input>
+                            <p className="select-none font-sans text-red-500 mt-1">{cgpaError}</p> 
                         </div>
                         <div className="bg-gray-100 rounded-xl mt-8 shadow-xl shadow-gray-300 p-3">
                             <div className="font-sans text-xl">
                                 Upload your resume (Should be named as "REGNO_NAME")
                             </div>
-                            <input required value={resume} onChange={(e) => setResume(e.target.value)} className="font-sans mt-3 rounded-xl font-bold hover:cursor-pointer transition duration-300" type="file" max={100} placeholder="CGPA"></input>
+                            <input required onChange={(e) => setResume(e.target.files[0])} className="font-sans mt-3 rounded-xl font-bold hover:cursor-pointer transition duration-300" type="file"></input>
                         </div>
                         <div className="flex justify-center">
-                            <button className="flex justify-center select-none rounded-xl bg-gray-200 border border-b font-sans font-bold text-xl my-10 p-2 hover:bg-black hover:text-white hover:cursor-pointer transition duation-300">Submit Application</button>
+                            <button type="submit" className="flex justify-center select-none rounded-xl bg-gray-200 border border-b font-sans font-bold text-xl my-10 p-2 hover:bg-black hover:text-white hover:cursor-pointer transition duation-300">Submit Application</button>
                         </div>
                     </form>
                 </div>

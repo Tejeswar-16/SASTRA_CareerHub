@@ -89,7 +89,7 @@ export default function Home(){
                                         <div className={`font-sans flex ml-96 ${company.status === "Active" ? "bg-green-700" : "bg-red-700"} p-1 rounded-xl text-white`}>
                                             {company.status}
                                         </div>
-                                        <div className="font-sans text-2xl font-bold">
+                                        <div className="font-sans text-xl font-bold">
                                             {company.title}
                                         </div>
                                         <div className="font-sans text-md font-semibold">
@@ -99,7 +99,7 @@ export default function Home(){
                                             Batch(es) Eligible: {company.batch.join(", ")} passouts
                                         </div>
                                         <div className="font-sans text-md font-semibold">
-                                            Depatment: {company.forDept.join(", ")}
+                                            Department: {company.forDept.join(", ")}
                                         </div>
                                         <div className="font-sans text-md ml-2 h-48 mt-2 p-2 border border-gray-300 rounded-xl overflow-hidden overflow-y-auto">
                                             {company.content}
