@@ -8,7 +8,7 @@ import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function Home(){
+export default function Company(){
 
     const [name,setName] = useState("");
     const [email,setEmail] = useState("");
@@ -168,31 +168,31 @@ export default function Home(){
                             <div className="font-sans text-lg lg:text-xl">
                                 Full Name
                             </div>
-                            <input value={formName.toUpperCase()} onChange={(e) => setFormName(e.target.value)} required className="border mt-3 rounded-xl w-61 md:w-176 lg:w-235 h-12 p-2 text-sm md:text-md" type="text" placeholder="Enter your full name with initial"></input>
+                            <input value={formName.toUpperCase()} onChange={(e) => setFormName(e.target.value)} required className="border mt-3 rounded-xl w-61 md:w-176 lg:w-235 h-12 p-2 text-sm md:text-lg" type="text" placeholder="Enter your full name with initial"></input>
                         </div>
                         <div className="bg-gray-100 rounded-xl mt-8 shadow-xl shadow-gray-300 p-3">
                             <div className="font-sans text-lg lg:text-xl">
                                 Register Number
                             </div>
-                            <input disabled value={getRegNo()} required className="select-none border mt-3 rounded-xl w-61 md:w-176 lg:w-235 h-12 p-2 text-sm md:text-md" type="text"></input>
+                            <input disabled value={getRegNo()} required className="select-none border mt-3 rounded-xl w-61 md:w-176 lg:w-235 h-12 p-2 text-sm md:text-lg" type="text"></input>
                         </div>
                         <div className="bg-gray-100 rounded-xl mt-8 shadow-xl shadow-gray-300 p-3">
                             <div className="font-sans text-lg lg:text-xl">
                                 SASTRA Email
                             </div>
-                            <input disabled value={email} required className="select-none border mt-3 rounded-xl w-61 md:w-176 lg:w-235 h-12 p-2 text-sm md:text-md" type="email"></input>
+                            <input disabled value={email} required className="select-none border mt-3 rounded-xl w-61 md:w-176 lg:w-235 h-12 p-2 text-sm md:text-lg" type="email"></input>
                         </div>
                         <div className="bg-gray-100 rounded-xl mt-8 shadow-xl shadow-gray-300 p-3">
                             <div className="font-sans text-lg lg:text-xl">
                                 Personal Email
                             </div>
-                            <input required value={personalEmail} onChange={(e) => setPersonalEmail(e.target.value)} className="select-none border mt-3 rounded-xl w-61 md:w-176 lg:w-235 h-12 p-2 text-sm md:text-md" type="email" placeholder="Enter your personal email"></input>
+                            <input required value={personalEmail} onChange={(e) => setPersonalEmail(e.target.value)} className="select-none border mt-3 rounded-xl w-61 md:w-176 lg:w-235 h-12 p-2 text-sm md:text-lg" type="email" placeholder="Enter your personal email"></input>
                         </div>
                         <div className="bg-gray-100 rounded-xl mt-8 shadow-xl shadow-gray-300 p-3">
                             <div className="font-sans text-lg lg:text-xl">
                                 Mobile Number
                             </div>
-                            <input required value={mobile} onChange={(e) => {setMobile(e.target.value);handleMobile(e.target.value)}} className="select-none border mt-3 rounded-xl w-61 md:w-176 lg:w-235 h-12 p-2 text-sm md:text-md" type="number" placeholder="Enter your mobile number"></input>
+                            <input required value={mobile} onChange={(e) => {setMobile(e.target.value);handleMobile(e.target.value)}} className="select-none border mt-3 rounded-xl w-61 md:w-176 lg:w-235 h-12 p-2 text-sm md:text-lg" type="number" placeholder="Enter your mobile number"></input>
                             <p className="select-none font-sans text-red-500 mt-1">{mobileError}</p> 
                         </div>
                         <div className="bg-gray-100 rounded-xl mt-8 shadow-xl shadow-gray-300 p-3">
@@ -210,27 +210,27 @@ export default function Home(){
                             <div className="font-sans text-lg lg:text-xl">
                                 Date of Birth (DOB)
                             </div>
-                            <input required value={dob} onChange={(e) => setDob(e.target.value)} className="select-none border mt-3 rounded-xl w-61 md:w-176 lg:w-235 h-12 p-2 text-sm md:text-md" type="date"></input>
+                            <input required value={dob} onChange={(e) => setDob(e.target.value)} className="select-none border mt-3 rounded-xl w-61 md:w-176 lg:w-235 h-12 p-2 text-sm md:text-lg" type="date"></input>
                         </div>
                         <div className="bg-gray-100 rounded-xl mt-8 shadow-xl shadow-gray-300 p-3">
                             <div className="font-sans text-lg lg:text-xl">
                                 Percentage scored in 10th grade
                             </div>
-                            <input required value={tenth} onChange={(e) => {setTenth(e.target.value);handleTenth(e.target.value)}} className="select-none border mt-3 rounded-xl w-61 md:w-176 lg:w-235 h-12 p-2 text-sm md:text-md" type="text" placeholder="10th grade (%)"></input>
+                            <input required value={tenth} onChange={(e) => {setTenth(e.target.value);handleTenth(e.target.value)}} className="select-none border mt-3 rounded-xl w-61 md:w-176 lg:w-235 h-12 p-2 text-sm md:text-lg" type="text" placeholder="10th grade (%)"></input>
                             <p className="select-none font-sans text-red-500 mt-1">{tenthError}</p> 
                         </div>
                         <div className="bg-gray-100 rounded-xl mt-8 shadow-xl shadow-gray-300 p-3">
                             <div className="font-sans text-lg lg:text-xl">
                                 Percentage scored in 12th grade
                             </div>
-                            <input required value={twelfth} onChange={(e) => {setTwelfth(e.target.value);handleTwelfth(e.target.value)}} className="select-none border mt-3 rounded-xl w-61 md:w-176 lg:w-235 h-12 p-2 text-sm md:text-md" type="text" placeholder="12th grade (%)"></input>
+                            <input required value={twelfth} onChange={(e) => {setTwelfth(e.target.value);handleTwelfth(e.target.value)}} className="select-none border mt-3 rounded-xl w-61 md:w-176 lg:w-235 h-12 p-2 text-sm md:text-lg" type="text" placeholder="12th grade (%)"></input>
                             <p className="select-none font-sans text-red-500 mt-1">{twelfthError}</p> 
                         </div>
                         <div className="bg-gray-100 rounded-xl mt-8 shadow-xl shadow-gray-300 p-3">
                             <div className="font-sans text-lg lg:text-xl">
                                 Cumulative Grade Point Average (CGPA)
                             </div>
-                            <input required value={cgpa} onChange={(e) => {setCgpa(e.target.value);handleCgpa(e.target.value)}} className="select-none border mt-3 rounded-xl w-61 md:w-176 lg:w-235 h-12 p-2 text-sm md:text-md" type="text" placeholder="CGPA"></input>
+                            <input required value={cgpa} onChange={(e) => {setCgpa(e.target.value);handleCgpa(e.target.value)}} className="select-none border mt-3 rounded-xl w-61 md:w-176 lg:w-235 h-12 p-2 text-sm md:text-lg" type="text" placeholder="CGPA"></input>
                             <p className="select-none font-sans text-red-500 mt-1">{cgpaError}</p> 
                         </div>
                         <div className="bg-gray-100 rounded-xl mt-8 shadow-xl shadow-gray-300 p-3">
