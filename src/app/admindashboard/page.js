@@ -68,28 +68,28 @@ export default function Home(){
                                 </div>
                             </div>
                             <div className="flex md:flex-row flex-col justify-center md:gap-x-7 lg:gap-x-4">
-                                <div className="mx-auto md:ml-1 lg:ml-0 lg:mx-0 my-10 lg:my-15 p-3 bg-white rounded-2xl shadow-gray-500 shadow-2xl w-75 md:w-60 hover:scale-105 transition duration-300 flex flex-col">
+                                <div className="mx-auto md:ml-1 lg:ml-0 lg:mx-0 my-10 lg:my-15 p-3 bg-white rounded-2xl shadow-2xl w-75 md:w-60 flex flex-col shadow-[2px_2px_0_0_black] transition-all duration-300 hover:shadow-[8px_8px_0_0_black] hover:-translate-y-1">
                                     <Image className="mx-auto rounded-xl" src={"/announcements.jpg"} width={360} height={360} alt="Announcements Management"></Image>
                                     <div className="select-none text-center font-sans mt-2 font-bold text-xl">Announcements Management</div>
                                     <div className="select-none text-center italic font-sans text-md mt-2">Create, update, or remove job and internship postings with complete details to maintain accurate listings.</div>
                                     <button onClick={handleAnnouncementsManagementClick} className="flex flex-row px-5 py-2 items-center cursor-pointer bg-[#1a73e8] rounded-3xl text-white font-sans mx-auto transition-colors  duration-300 ease-in-out hover:bg-[#0e53ad] mt-auto">Visit <FiExternalLink className="ml-2"/></button>
                                 </div>
             
-                                <div className="mx-auto md:ml-1 lg:ml-0 lg:mx-0 my-10 lg:my-15 p-3 bg-white rounded-2xl shadow-gray-500 shadow-2xl w-75 md:w-60 hover:scale-105 transition duration-300 flex flex-col">
+                                <div className="mx-auto md:ml-1 lg:ml-0 lg:mx-0 my-10 lg:my-15 p-3 bg-white rounded-2xl shadow-2xl w-75 md:w-60 shadow-[2px_2px_0_0_black] transition-all duration-300 hover:shadow-[8px_8px_0_0_black] hover:-translate-y-1 flex flex-col">
                                     <Image className="mx-auto rounded-xl" src={"/track_job.jpg"} width={360} height={360} alt="Application Tracking"></Image>
                                     <div className="select-none text-center font-sans mt-2 font-bold text-xl">Application Tracking</div>
                                     <div className="select-none text-center italic font-sans text-md mt-2">Track student applications with status updates, and generate reports to analyze trends and engagement.</div>
                                     <button onClick={handleApplicationTrackingClick} className="flex flex-row px-5 py-2 items-center cursor-pointer bg-[#1a73e8] rounded-3xl text-white font-sans mx-auto mt-5 transition-colors  duration-300 ease-in-out hover:bg-[#0e53ad] mt-auto">Visit <FiExternalLink className="ml-2"/></button>
                                 </div>
             
-                                <div className="mx-auto md:ml-1 lg:ml-0 lg:mx-0 my-10 lg:my-15 p-3 bg-white rounded-2xl shadow-gray-500 shadow-2xl w-75 md:w-60 hover:scale-105 transition duration-300 flex flex-col">
+                                <div className="mx-auto md:ml-1 lg:ml-0 lg:mx-0 my-10 lg:my-15 p-3 bg-white rounded-2xl shadow-2xl w-75 md:w-60 shadow-[2px_2px_0_0_black] transition-all duration-300 hover:shadow-[8px_8px_0_0_black] hover:-translate-y-1 flex flex-col">
                                     <Image className="mx-auto rounded-xl" src={"/contentresources.jpg"} width={360} height={360} alt="Content & Resource Management"></Image>
                                     <div className="select-none text-center font-sans mt-2 font-bold text-xl">Content & Resource Management</div>
                                     <div className="select-none text-center italic font-sans text-md mt-2">Upload, organize, and manage career resources to provide students with a centralized hub for learning and preparation.</div>
                                     <button onClick={handleContentAndResourceManagementClick} className="flex flex-row px-5 py-2 items-center cursor-pointer bg-[#1a73e8] rounded-3xl text-white font-sans mx-auto mt-5 transition-colors  duration-300 ease-in-out hover:bg-[#0e53ad] mt-auto">Visit <FiExternalLink className="ml-2"/></button>
                                 </div>
             
-                                <div className="mx-auto md:ml-1 lg:ml-0 lg:mx-0 my-10 lg:my-15 p-3 bg-white rounded-2xl shadow-gray-500 shadow-2xl w-75 md:w-60 hover:scale-105 transition duration-300 flex flex-col">
+                                <div className="mx-auto md:ml-1 lg:ml-0 lg:mx-0 my-10 lg:my-15 p-3 bg-white rounded-2xl shadow-2xl w-75 md:w-60 shadow-[2px_2px_0_0_black] transition-all duration-300 hover:shadow-[8px_8px_0_0_black] hover:-translate-y-1 flex flex-col">
                                     <Image className="mx-auto rounded-xl" src={"/feedback.jpg"} width={360} height={360} alt="Feedback & Support"></Image>
                                     <div className="select-none text-center font-sans mt-2 font-bold text-xl">Feedback & Support</div>
                                     <div className="select-none text-center italic font-sans text-md mt-2">Manage and respond to student and recruiter feedback, complaints, and queries while tracking support tickets to enhance the platform experience.</div>
