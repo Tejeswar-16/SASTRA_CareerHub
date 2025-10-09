@@ -81,34 +81,38 @@ export default function Home(){
                             </div>
                         </>
                     }
-                    <div className="mx-auto flex flex-wrap justify-center gap-9 w-250"> 
+                    <div className="mx-auto flex flex-col md:flex-wrap md:flex-row justify-center md:gap-9 w-75 md:w-190 lg:w-250"> 
                         {
                             companyData.map((company,index) => (
                                 <div key={index}>
-                                    <div className="select-none flex flex-col items-center bg-white rounded-xl shadow-xl mt-5 w-120 p-5">
-                                        <div className={`font-sans flex ml-96 ${company.status === "Active" ? "bg-green-700" : "bg-red-700"} p-1 rounded-xl text-white`}>
-                                            {company.status}
-                                        </div>
-                                        <div className="font-sans text-xl font-bold">
+                                    <div className="select-none flex flex-col items-center bg-white rounded-xl shadow-xl mt-10 w-75 md:w-90 lg:w-120 p-5">
+                                        <div className="font-sans text-md lg:text-xl font-bold">
                                             {company.title}
                                         </div>
-                                        <div className="font-sans text-md font-semibold">
-                                            Role: {company.role}
+                                        <div className="flex flex-row justify-between items-center">
+                                            <div className="flex flex-col lg:mr-27">
+                                                <div className="font-sans text-sm md:text-md font-semibold">
+                                                    Role: {company.role}
+                                                </div>
+                                                <div className="font-sans text-sm lg:text-md font-semibold">
+                                                    Batch(es) Eligible: {company.batch.join(", ")} passouts
+                                                </div>
+                                                <div className="font-sans text-sm md:text-md font-semibold">
+                                                    Department: {company.forDept.join(", ")}
+                                                </div>
+                                            </div>
+                                            <div className={`font-sans flex md:ml-4 ${company.status === "Active" ? "bg-green-700" : "bg-red-700"} p-1 text-sm rounded-xl text-white`}>
+                                                {company.status}
+                                            </div>
                                         </div>
-                                        <div className="font-sans text-md font-semibold">
-                                            Batch(es) Eligible: {company.batch.join(", ")} passouts
-                                        </div>
-                                        <div className="font-sans text-md font-semibold">
-                                            Department: {company.forDept.join(", ")}
-                                        </div>
-                                        <div className="font-sans text-md ml-2 h-48 mt-2 p-2 border border-gray-300 rounded-xl overflow-hidden overflow-y-auto">
+                                        <div className="font-sans text-sm h-48 mt-2 p-2 border border-gray-300 rounded-xl overflow-hidden overflow-y-auto">
                                             {company.content}
                                         </div>
-                                        <div className="flex flex-row justify-between space-x-3 mt-5">
-                                            <div onClick={() => {company.status === "Active" ? handleSASTRAClick(company.title) : undefined}} className={`font-sans bg-blue-200 rounded-xl font-semibold shadow-xl p-2 text-md ${company.status === "Active" ? "hover:cursor-pointer hover:bg-blue-500 hover:text-white" : "hover:cursor-not-allowed opacity-50"} transition duration-300`}>
+                                        <div className="flex flex-col items-center md:flex-row justify-between md:space-x-3 mt-5">
+                                            <div onClick={() => {company.status === "Active" ? handleSASTRAClick(company.title) : undefined}} className={`font-sans bg-blue-200 rounded-xl font-semibold shadow-xl p-2 text-sm md:text-md ${company.status === "Active" ? "hover:cursor-pointer hover:bg-blue-500 hover:text-white" : "hover:cursor-not-allowed opacity-50"} transition duration-300`}>
                                                 Apply (SASTRA's Portal)
                                             </div>
-                                            <div className={`font-sans bg-green-200 rounded-xl font-semibold shadow-xl p-2 text-md ${company.status === "Active" ? "hover:cursor-pointer hover:bg-green-500" : "hover:cursor-not-allowed opacity-50"} transition duration-300`}>
+                                            <div className={`font-sans bg-green-200 mt-3 md:mt-0 rounded-xl font-semibold shadow-xl p-2 text-sm md:text-md ${company.status === "Active" ? "hover:cursor-pointer hover:bg-green-500" : "hover:cursor-not-allowed opacity-50"} transition duration-300`}>
                                                 Apply (Company's Portal)
                                             </div>
                                         </div>

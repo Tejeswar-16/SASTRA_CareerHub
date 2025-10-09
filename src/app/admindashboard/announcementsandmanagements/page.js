@@ -5,6 +5,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { useRouter } from 'next/navigation'
 import NavBar from '@/app/NavBar'
 import { addDoc, collection, getDocs, query } from 'firebase/firestore'
+import Image from 'next/image'
 const page = () => {
   const [adminName,setAdminName] = useState("")
   const [adminEmail,setAdminEmail] = useState("")
@@ -13,9 +14,6 @@ const page = () => {
   const [dataFromDB,setDataFromDB] = useState([])
   const handleLogoClick = () => {
           router.push("/admindashboard")
-  }
-  const handleToggleModeClick = () => {
-      setIsDark(prev => !prev)
   }
   async function handleLogout(){
       try{
@@ -56,12 +54,11 @@ const page = () => {
   return (
     <>
     <div className='py-5 bg-gray-100 min-h-screen flex flex-col gap-y-5'>
-      <NavBar username={adminName} email={adminEmail} darkMode={false} handleLogoClick={handleLogoClick} handleDarkMode={handleToggleModeClick}
-      handleLightMode={handleToggleModeClick} handleLogout={handleLogout}/>
-      <div className='mx-auto bg-white rounded-xl shadow-lg my-5 p-2 w-75 md:w-190 lg:w-250'>
+      <NavBar username={adminName} email={adminEmail} handleLogoClick={handleLogoClick} handleLogout={handleLogout}/>
+      <div className='mx-auto bg-white rounded-xl shadow-lg my-5 p-2 w-75 md:w-190 lg:w-240 overflow-hidden overflow-x-auto'>
         
       <div className='font-sans text-center py-5 text-3xl font-bold'>Announcements & Notifications</div>
-      <table className=' text-center font-sans'>
+      <table className='text-center font-sans'>
         <thead>
           <tr className='text-lg'>
             <th className='bg-blue-950 text-white py-3 px-4 border border-gray-400'>S.No</th>
@@ -77,11 +74,11 @@ const page = () => {
         <tbody>
           {
             dataFromDB.map((announcement,index) => {
-              return <tr key={index} className='bg-yellow-100 text-sm font-medium p-2 hover:bg-yellow-200 transition duration-300 ease-in-out'>
+              return <tr key={index} className='text-sm font-medium p-2 hover:bg-gray-200 transition duration-300 ease-in-out'>
                 <td className='border border-black p-2'>{index+1}</td>
                 <td className='border border-black p-2'>{announcement.title}</td>
                 <td className='border border-black p-2 w-50 '>
-                <div className="overflow-x-auto overflow-hidden">
+                <div className="overflow-x-auto overflow-hidden w-60">
                   {announcement.content}
                 </div>
                 </td>
@@ -112,11 +109,13 @@ const page = () => {
       </table>
       </div>
       {loading && 
-      <>
-        <div className='fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center'>
-          <div className='mx-auto font-sans font-bold text-3xl'>Loading</div>
-        </div>
-      </>
+          <>
+              <div className="fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center">
+                  <div className="mx-auto font-mono font-bold text-3xl">
+                      <Image src={"/loading.gif"} width={200} height={20} alt="Loading..."></Image>
+                  </div>
+              </div>
+          </>
       }
     </div>
     </>
