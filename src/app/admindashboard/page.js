@@ -2,8 +2,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { FiLogOut } from 'react-icons/fi'
-import { MdLightMode, MdDarkMode } from 'react-icons/md'
 import { FiExternalLink } from 'react-icons/fi'
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from '../_util/config'
