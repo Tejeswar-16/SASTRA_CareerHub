@@ -109,16 +109,6 @@ export default function Home(){
         router.push("/"+params.registerNumber+"/resources/"+Topic.toLowerCase());
     }
 
-    function handleDarkMode(){
-        setDarkMode(true);
-        document.documentElement.classList.add('dark')
-    }
-
-    function handleLightMode(){
-        setDarkMode(false);
-        document.documentElement.classList.remove('dark')
-    }
-
     return(
         <>
             <div className="relative bg-gray-100 py-5 min-h-screen md:bg-gray-100">
