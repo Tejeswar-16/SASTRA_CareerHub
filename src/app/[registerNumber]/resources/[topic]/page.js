@@ -3,7 +3,7 @@
 import { auth, db } from "@/app/_util/config";
 import NavBar from "@/app/NavBar"
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { addDoc, collection, doc, getDocs, query, setDoc, updateDoc } from "firebase/firestore";
+import { collection, doc, getDocs, query, setDoc, updateDoc } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
@@ -13,6 +13,7 @@ export default function Home(){
 
     const [username,setUsername] = useState("");
     const [email,setEmail] = useState("");
+    const [selectedOption,setSelectedOption] = useState({});
     const [questions,setQuestions] = useState([]);
     const [mcqs,setMcqs] = useState([]);
     const [loading,setLoading] = useState(false);
@@ -283,12 +284,12 @@ export default function Home(){
                                         <p className="font-semibold">Question {index+1}</p>
                                         <p className="font-semibold">{mcq.stmt}</p>
                                         <div className="flex flex-row">
-                                            <p className="flex justify-center select-none bg-gray-200 my-2 rounded-lg p-2 hover:cursor-pointer border border-gray-300 hover:bg-gray-700 hover:text-white transition duration-300 w-70">{mcq.opt1}</p>
-                                            <p className="flex justify-center select-none bg-gray-200 my-2 rounded-lg p-2 hover:cursor-pointer border border-gray-300 hover:bg-gray-700 hover:text-white transition duration-300 w-70 ml-5">{mcq.opt2}</p>
+                                            <p onClick={() => setSelectedOption((prev) => ({...prev,[index]:"opt1"}))} className={`flex justify-center select-none ${selectedOption[index] === "opt1" && mcq.ans === "opt1" ? "bg-green-200" : (selectedOption[index] === "opt1" && mcq.ans !== "opt1") ? "bg-red-200" : "bg-gray-200"} my-2 rounded-lg p-2 hover:cursor-pointer border border-gray-300 hover:bg-gray-700 hover:text-white transition duration-300 w-70`}>{mcq.opt1}</p>
+                                            <p onClick={() => setSelectedOption((prev) => ({...prev,[index]:"opt2"}))} className={`flex justify-center select-none ${selectedOption[index] === "opt2" && mcq.ans === "opt2" ? "bg-green-200" : (selectedOption[index] === "opt2" && mcq.ans !== "opt2") ? "bg-red-200" : "bg-gray-200"} my-2 rounded-lg p-2 hover:cursor-pointer border border-gray-300 hover:bg-gray-700 hover:text-white transition duration-300 w-70 ml-5`}>{mcq.opt2}</p>
                                         </div>
                                         <div className="flex flex-row">
-                                            <p className="flex justify-center select-none bg-gray-200 my-2 rounded-lg p-2 hover:cursor-pointer border border-gray-300 hover:bg-gray-700 hover:text-white transition duration-300 w-70">{mcq.opt3}</p>
-                                            <p className="flex justify-center select-none bg-gray-200 my-2 rounded-lg p-2 hover:cursor-pointer border border-gray-300 hover:bg-gray-700 hover:text-white transition duration-300 w-70 ml-5">{mcq.opt4}</p>
+                                            <p onClick={() => setSelectedOption((prev) => ({...prev,[index]:"opt3"}))} className={`flex justify-center select-none ${selectedOption[index] === "opt3" && mcq.ans === "opt3" ? "bg-green-200" : (selectedOption[index] === "opt3" && mcq.ans !== "opt3") ? "bg-red-200" : "bg-gray-200"} my-2 rounded-lg p-2 hover:cursor-pointer border border-gray-300 hover:bg-gray-700 hover:text-white transition duration-300 w-70`}>{mcq.opt3}</p>
+                                            <p onClick={() => setSelectedOption((prev) => ({...prev,[index]:"opt4"}))} className={`flex justify-center select-none ${selectedOption[index] === "opt4" && mcq.ans === "opt4" ? "bg-green-200" : (selectedOption[index] === "opt4" && mcq.ans !== "opt4") ? "bg-red-200" : "bg-gray-200"} my-2 rounded-lg p-2 hover:cursor-pointer border border-gray-300 hover:bg-gray-700 hover:text-white transition duration-300 w-70 ml-5`}>{mcq.opt4}</p>
                                         </div>
                                     </div>
                                 ))

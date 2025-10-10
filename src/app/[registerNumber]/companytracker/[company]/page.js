@@ -237,7 +237,7 @@ export default function Company(){
                             <div className="font-sans text-lg lg:text-xl">
                                 Upload your resume (Should be named as "REGNO_NAME")
                             </div>
-                            <input required onChange={(e) => setResume(e.target.files[0])} className="font-sans mt-3 rounded-xl font-bold hover:cursor-pointer transition duration-300" type="file"></input>
+                            <input required onChange={(e) => setResume(e.target.files[0])} className="font-sans mt-3 w-60 md:w-200 text-sm file:rounded-xl font-bold file:bg-black file:text-white file:mr-5 file:p-2 hover:file:cursor-pointer transition duration-300" type="file"></input>
                         </div>
                         <div className="flex justify-center">
                             <button type="submit" className="flex justify-center select-none rounded-xl bg-gray-200 border border-b font-sans font-bold text-xl my-10 p-2 hover:bg-black hover:text-white hover:cursor-pointer transition duation-300">Submit Application</button>

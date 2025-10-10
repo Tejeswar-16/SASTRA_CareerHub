@@ -119,7 +119,7 @@ export default function Home(){
                     📚Resources Hub
                 </div>
                 <div className="flex flex-col lg:flex-row justify-center">
-                    <div className="mx-auto lg:mx-0 bg-white rounded-xl shadow-xl p-4 w-75 md:w-190 lg:w-80 lg:mr-5 mb-5 md:mb-0">
+                    <div className="mx-auto lg:mx-0 bg-white rounded-xl shadow-xl border border-b-5 border-r-2 p-4 w-75 md:w-190 lg:w-80 lg:mr-5 mb-5 md:mb-0">
                         <div className="select-none font-sans font-bold text-xl">
                             Browse Categories
                         </div>
@@ -161,8 +161,8 @@ export default function Home(){
                         </>
                     }
 
-                    <div className="mx-auto lg:mx-0 mt-0 md:mt-5 lg:mt-0 bg-white rounded-xl shadow-xl w-75 md:w-190 lg:w-165 md:h-150">
-                        <div className="bg-gray-100 rounded-xl shadow-xl px-4 py-2">
+                    <div className="mx-auto lg:mx-0 mt-0 md:mt-5 lg:mt-0 bg-white rounded-xl shadow-xl border border-b-5 border-r-2 w-75 md:w-190 lg:w-165 md:h-150">
+                        <div className="bg-gray-100 rounded-xl shadow-xl px-4 py-2 border-b-3">
                             <input value={searchResource} onChange={(e) => setSearchResource(e.target.value)} className="font-sans border rounded-xl w-67 md:w-182 lg:w-153 h-10 p-2" type="search" placeholder="Search topics..."></input>
                             <div className="flex flex-wrap md:flex-row justify-between items-center">
                                 <div onClick={() => handleChipsClick(0)} className={`select-none font-sans border-gray-300 rounded-2xl ${clicked[0] ? "bg-yellow-200" : ""} p-2 mt-2 hover:cursor-pointer`}>All</div> 
@@ -178,11 +178,11 @@ export default function Home(){
                         <div className="select-none font-sans font-bold text-xl px-4 my-4">
                             Resources
                         </div>
-                        <div className="mx- 0 lg:mx-0 md:mx-auto bg-white rounded-xl p-4 md:w-165 h-100 overflow-hidden overflow-y-auto">
+                        <div className="mx- 0 lg:mx-0 md:mx-auto bg-white rounded-lg p-4 md:w-164 h-100 overflow-hidden overflow-y-auto">
                             <div className="flex md:flex-wrap md:flex-row flex-col justify-between">
                                 {
                                     resource.map((resource,index) => (
-                                        <div key={index} className="mx-auto lg:mx-0 bg-gray-100 rounded-xl shadow-xl p-2 w-65 md:w-[48%] mb-4 border border-gray-200">
+                                        <div key={index} className="mx-auto lg:mx-0 bg-gray-100 rounded-xl shadow-xl p-2 w-65 md:w-[48%] mb-4 border border-b-4">
                                             <div className="select-none font-sans font-bold text-lg">
                                                 {resource.topic}
                                             </div>
