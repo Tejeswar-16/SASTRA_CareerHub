@@ -95,14 +95,17 @@ const page = () => {
       setLoading(false)
     }
   }
+  const handleAddAnnouncement = () => {
+    router.push("/admindashboard/announcementsandmanagements/addannouncement")
+  }
   return (
     <>
     <div className='py-5 bg-gray-100 min-h-screen flex flex-col gap-y-5'>
       <NavBar username={adminName} email={adminEmail} handleLogoClick={handleLogoClick} handleLogout={handleLogout}/>
-      <div className='mx-auto bg-white rounded-xl shadow-lg my-5 p-2 w-75 md:w-190 lg:w-240 overflow-hidden overflow-x-auto'>
-      <div className='font-sans text-center py-5 text-3xl font-bold'>Announcements & Notifications</div>
+      <div className='mx-auto bg-white rounded-xl shadow-lg my-5 p-2 w-75 md:w-190 lg:w-250 overflow-hidden overflow-x-auto'>
+      <div className='font-sans text-center py-5 text-3xl font-bold select-none'>Announcements & Notifications</div>
       <div className='flex flex-row font-sans mb-10 justify-between items-center p-4'>
-        <div className='rounded-3xl py-2 px-4 bg-blue-500 flex gap-x-1 text-white items-center text-center cursor-pointer hover:opacity-[70%] transition duration-300 ease-in-out'><FiPlus color='white'/>Add</div>
+        <div className='rounded-3xl py-2 px-4 bg-blue-500 flex gap-x-1 text-white items-center text-center cursor-pointer hover:opacity-[70%] transition duration-300 ease-in-out' onClick={handleAddAnnouncement}><FiPlus color='white'/>Add</div>
         <div className='flex flex-row border border-black p-2 rounded-3xl gap-x-4 items-center'>
           <MdSearch className='ml-1'/>
           <input
@@ -116,34 +119,34 @@ const page = () => {
         dataFromDB.map((announcement,index) => {
           return(
             <div key={index} className='border rounded-2xl h-65 w-50 shadow-[2px_2px_0_0_black] flex flex-col justify-center items-center relative hover:-translate-y-1 hover:shadow-[6px_6px_0_0_black] transition duration-300 ease-in-out'>
-              <div className='absolute top-0 w-full bg-green-500 py-2 rounded-tr-2xl rounded-tl-2xl text-center'>{getType()}</div>
-              <div className='font-bold mt-8'>{announcement.role}</div>
+              <div className='absolute top-0 w-full bg-green-500 py-2 rounded-tr-2xl rounded-tl-2xl text-center select-none'>{getType()}</div>
+              <div className='font-bold mt-8 select-none'>{announcement.role}</div>
               <div className='flex flex-row gap-1 items-center mt-2 ml-2'>
-                <div><img className="w-12 mr-3" src={`https://logo.clearbit.com/${announcement.title.split(" ")[0]}.com`} alt={`${announcement.title.split(" ")[0]}`}/></div>
+                <div><img className="w-12 mr-3 select-none" src={`https://logo.clearbit.com/${announcement.title.split(" ")[0]}.com`} alt={`${announcement.title.split(" ")[0]}`}/></div>
                 <div className='flex flex-col justify-center items-center'>
                   <div className='flex flex-row justify-center items-center'>
-                    <div className='font-bold text-lg'>{announcement.title.split(" ")[0] == "Wells" ? "Wells Fargo" : announcement.title.split(" ")[0]}</div>
+                    <div className='font-bold select-none text-lg'>{announcement.title.split(" ")[0] == "Wells" ? "Wells Fargo" : announcement.title.split(" ")[0]}</div>
                     <MdCheckCircle className="ml-1" size={15} color='#0a98f7'/>
                   </div>
-                  <div className='text-gray-900 text-[10px]'>{getRandom()}+ students applied</div>  
+                  <div className='text-gray-900 text-[10px] select-none'>{getRandom()}+ students applied</div>  
                 </div>
               </div>
-              <div className='flex flex-row gap-x-1 mt-2'>
+              <div className='flex flex-row gap-x-1 mt-2 select-none'>
                 Schools: 
                 {
                   announcement.forDept.map((dept,index) => {
                     return(
-                      <div key={index} className='bg-green-300 p-1 text-[10px] font-semibold text-black rounded-sm'>{dept}</div>
+                      <div key={index} className='bg-green-300 p-1 text-[10px] font-semibold text-black rounded-sm select-none'>{dept}</div>
                     )
                   })
                 }
               </div>
-              <div className='flex flex-row gap-x-1 mt-2'>
+              <div className='flex flex-row gap-x-1 mt-2 select-none'>
                 Batches:
                 {
                   announcement.batch.map((year,index) => {
                     return(
-                      <div key={index} className='bg-green-300 p-1 text-[10px] font-semibold text-black rounded-sm'>{year}</div>
+                      <div key={index} className='bg-green-300 p-1 text-[10px] font-semibold text-black rounded-sm select-none'>{year}</div>
                     )
                   })
                 }
