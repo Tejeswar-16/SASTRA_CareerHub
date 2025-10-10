@@ -100,6 +100,7 @@ export default function Home(){
     },[clicked,searchResource]);
 
     function handleOpen(topic){
+        setLoading(true);
         let Topic = "";
         for (let i=0;i<topic.length;i++){
             if (topic[i] !== " "){
@@ -107,6 +108,7 @@ export default function Home(){
             }
         }
         router.push("/"+params.registerNumber+"/resources/"+Topic.toLowerCase());
+        setLoading(false);
     }
 
     return(
