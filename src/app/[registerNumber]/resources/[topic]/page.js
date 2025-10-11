@@ -51,7 +51,7 @@ export default function Home(){
                 setEmail(user.email);
             }
             else{
-                router.push("/studentLogin");
+                router.push("/studentlogin");
             }
         });
     },[]);

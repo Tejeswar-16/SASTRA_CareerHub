@@ -18,6 +18,8 @@ export default function Home() {
   const [pwdError,setPwdError] = useState("");
   const [emailError,setEmailError] = useState("");
   const [loading,setLoading] = useState(false);
+  const [invalidEmailPassword,setInvalidEmailPassword] = useState(false);
+  const [pwReset,setPwReset] = useState(false);
 
   //Router for navigation
   const router = useRouter();
@@ -119,7 +121,9 @@ export default function Home() {
     catch(error)
     {
       if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password" || error.code === "auth/invalid-credential")
-        alert("Hey! Invalid Email or Password");
+        setInvalidEmailPassword(true);
+      else
+        setInvalidEmailPassword(false);
     }
     finally{
       setLoading(false);
@@ -140,13 +144,21 @@ export default function Home() {
     try
     {
       await sendPasswordResetEmail(auth,email);
-      alert("A password reset link has been sent to your registered SASTRA email ID")
+      setPwReset(true);
     }
     catch(error)
     {
       if (error.code === "auth/invalid-email")
         setEmailError("Invalid Email");
     }
+  }
+
+  function handleInvalidOk(){
+    setInvalidEmailPassword(false);
+  }
+
+  function handlePWOk(){
+    setPwReset(false);
   }
 
   return (
@@ -205,6 +217,26 @@ export default function Home() {
           <div className="fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center">
             <div className="mx-auto font-mono font-bold text-2xl text-white">
               <Image src={"/loading.gif"} width={200} height={20} alt="Loading..."></Image>
+            </div>
+          </div>
+      }
+
+      {
+        invalidEmailPassword && 
+          <div className="fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center">
+            <div className="select-none font-sans bg-white rounded-xl shadow-xl p-5 border">
+              <p className="text-lg">Invalid Email or Password</p>
+              <div className="flex justify-center "><button onClick={handleInvalidOk} className="bg-black text-white w-10 rounded-xl mt-2 p-2 hover:cursor-pointer">OK</button></div>
+            </div>
+          </div>
+      }
+
+      {
+        pwReset && 
+          <div className="fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center">
+            <div className="select-none font-sans bg-white rounded-xl shadow-xl p-5 border w-75 md:w-90">
+              <p className="text-lg">A password reset link has been sent to your registered SASTRA email ID</p>
+              <div className="flex justify-center "><button onClick={handlePWOk} className="bg-black text-white w-10 rounded-xl mt-2 p-2 hover:cursor-pointer">OK</button></div>
             </div>
           </div>
       }

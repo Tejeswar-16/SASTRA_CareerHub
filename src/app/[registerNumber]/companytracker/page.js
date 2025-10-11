@@ -24,6 +24,8 @@ export default function Home(){
                 setName(user.displayName)
                 setEmail(user.email);
             }
+            else
+                router.push("/studentlogin");
         })
     });
 

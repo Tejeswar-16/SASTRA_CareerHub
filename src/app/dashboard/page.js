@@ -22,7 +22,7 @@
                     setEmail(user.email);
                 }
                 else
-                    router.push("/studentLogin");
+                    router.push("/studentlogin");
             })
         })
 
@@ -57,7 +57,7 @@
         }
 
         function handleInterviewExplore(){
-
+            router.push("/"+getRegNo()+"/interviewexperience")
         }
 
         return(

@@ -25,6 +25,8 @@ export default function Company(){
     const [tenthError,setTenthError] = useState("");
     const [twelfthError,setTwelfthError] = useState("");
     const [cgpaError,setCgpaError] = useState("");
+    const [regSuccess,setRegSuccess] = useState(false);
+    const [regNotSuccess,setRegNotSuccess] = useState(false);
     const [loading,setLoading] = useState(false);
 
     const router = useRouter();
@@ -37,6 +39,8 @@ export default function Company(){
                 setEmail(user.email);
                 setFormName(user.displayName);
             }
+            else
+                router.push("/studentlogin");
         })
     },[]);
     
@@ -133,18 +137,26 @@ export default function Company(){
                     timestamp: new Date()
                 });
                 setLoading(false);
-                alert("Thank you for registering. Your response has been submitted");
-                router.push("/"+params.registerNumber+"/companytracker");
+                setRegSuccess(true);
             }
             else{
                 setLoading(false);
-                alert("Sorry! You have already registered for this position");
-                router.push("/"+params.registerNumber+"/companytracker");
+                setRegNotSuccess(true);
             }
         }
         catch (error){
             console.log(error.message);
         }
+    }
+
+    function handleRegSuccessOk(){
+        setRegSuccess(false);
+        router.push("/"+params.registerNumber+"/companytracker");
+    }
+
+    function handleRegNotSuccessOk(){
+        setRegNotSuccess(false);
+        router.push("/"+params.registerNumber+"/companytracker");
     }
 
     return (
@@ -161,6 +173,26 @@ export default function Company(){
                                 </div>
                             </div>
                         </>
+                    }
+
+                    {
+                        regSuccess && 
+                        <div className="fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center">
+                            <div className="flex justify-center select-none font-sans bg-white rounded-xl shadow-xl p-5 border w-75 md:w-90">
+                            <p className="text-lg">Thank you for registering. Your response has been submitted</p>
+                            <div className="flex justify-center "><button onClick={handleRegSuccessOk} className="bg-black text-white w-10 rounded-xl mt-2 p-2 hover:cursor-pointer">OK</button></div>
+                            </div>
+                        </div>
+                    }
+
+                    {
+                        regNotSuccess && 
+                        <div className="fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center">
+                            <div className="select-none font-sans bg-white rounded-xl shadow-xl p-5 border w-75 md:w-90">
+                            <p className="text-lg">Sorry! You have already registered for this position</p>
+                            <div className="flex justify-center "><button onClick={handleRegNotSuccessOk} className="bg-black text-white w-10 rounded-xl mt-2 p-2 hover:cursor-pointer">OK</button></div>
+                            </div>
+                        </div>
                     }
                     
                     <form onSubmit={handleSubmit}>
