@@ -12,6 +12,7 @@
 
         const [username,setUsername] = useState("");
         const [email,setEmail] = useState("");
+        const [loading,setLoading] = useState(false);
 
         const router = useRouter();
 
@@ -45,11 +46,15 @@
         }
 
         function handleResourceExplore(){
+            setLoading(true);
             router.push("/"+getRegNo()+"/resources");
+            setLoading(false);
         }
 
         function handleCompanyExplore(){
-            router.push("/"+getRegNo()+"/companytracker")
+            setLoading(true);
+            router.push("/"+getRegNo()+"/companytracker");
+            setLoading(false);
         }
 
         function handleProgressExplore(){
@@ -57,13 +62,26 @@
         }
 
         function handleInterviewExplore(){
-            router.push("/"+getRegNo()+"/interviewexperience")
+            setLoading(true);
+            router.push("/"+getRegNo()+"/interviewexperience");
+            setLoading(false);
         }
 
         return(
             <>
                 <div className="relative bg-gray-100 py-5 min-h-screen md:bg-gray-100">
                     <NavBar username={username} email={email} handleLogoClick={handleLogoClick} handleLogout={handleLogout}></NavBar>
+                    
+                    {loading && 
+                        <>
+                            <div className="fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center">
+                                <div className="mx-auto font-mono font-bold text-3xl">
+                                    <Image src={"/loading.gif"} width={200} height={20} alt="Loading..."></Image>
+                                </div>
+                            </div>
+                        </>
+                    }
+                    
                     <div className="flex md:flex-row flex-col justify-center">
                         <div className="mx-auto md:ml-1 lg:ml-0 lg:mx-0 my-10 lg:my-15 p-3 border border-b-5 border-r-2 bg-white rounded-2xl shadow-gray-500 shadow-2xl w-75 md:w-60 hover:scale-105 transition duration-300">
                             <Image className="mx-auto rounded-xl" src={"/resources.jpg"} width={360} height={360} alt="resources"></Image>

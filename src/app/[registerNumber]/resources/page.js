@@ -12,7 +12,6 @@ export default function Home(){
 
     const [username,setUsername] = useState("");
     const [email,setEmail] = useState("");
-    const [darkMode,setDarkMode] = useState(false);
     const [clicked,setClicked] = useState([true,false,false,false,false,false,false,false]);
     const [resource,setResource] = useState([]);
     const [loading,setLoading] = useState(false);
