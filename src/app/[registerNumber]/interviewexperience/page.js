@@ -54,10 +54,6 @@ export default function Home(){
         }
     },[postData]);
 
-    function getRegNo(){
-        return email.substring(0,9);
-    }
-
     async function handleAddPost(){
         try
         {
@@ -65,7 +61,8 @@ export default function Home(){
             await addDoc(collection(db,"posts"),{
                 post: postContent,
                 addedAt: new Date(),
-                regno: getRegNo()
+                email: email,
+                name: username
             });
             fetchPosts();
             setLoading(false);
@@ -145,14 +142,15 @@ export default function Home(){
                     addPost && 
                         <div>
                             <div className="fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center">
-                                <div className="flex flex-col justify-center items-center bg-white rounded-xl shadow-xl border-b-4 border-t-4 border-r-2 border-l-2 p-2 w-75 h-75 md:w-100 md:h-100">
+                                <div className="flex flex-col justify-center items-center bg-white rounded-xl shadow-xl border-b-4 border-t-4 border-r-2 border-l-2 p-2 w-75 h-75 md:w-100 md:h-105">
                                     <div onClick={() => setAddPost(false)} className="ml-65 md:ml-89 select-none hover:bg-red-400 hover:cursor-pointer p-1 transition duration-300">✖️</div>
                                     <div className="flex flex-row justify-center">
                                         <div className="select-none font-sans font-bold text-xl md:text-2xl">Share your experience</div>
-                                        
                                     </div>
-                                    <textarea onChange={(e) => setPostContent(e.target.value)} placeholder="Share your thoughts..." className="resize-none w-65 h-100 md:h-70 md:w-80 p-2 my-2 text-md md:text-lg rounded-xl border"></textarea>
-                                    <button onClick={handleAddPost} className="select-none font-sans font-semibold text-white p-2 rounded-xl shadoe-xl bg-blue-500 hover:bg-blue-700 hover:cursor-pointer transition duration-300">Add Post</button>
+                                    <form onSubmit={handleAddPost} className="flex flex-col justify-center items-center">
+                                        <textarea required onChange={(e) => setPostContent(e.target.value)} placeholder="Share your thoughts..." className="resize-none w-65 h-43 md:h-70 md:w-80 p-2 my-2 text-md md:text-lg rounded-xl border"></textarea>
+                                        <button type="submit" className="select-none font-sans font-semibold text-white p-2 rounded-xl shadoe-xl bg-blue-500 hover:bg-blue-700 hover:cursor-pointer transition duration-300">Add Post</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -186,14 +184,14 @@ export default function Home(){
                                     <div className="flex flex-wrap md:flex-row justify-between items-center lg:px-18 lg:py-2">
                                         <div className="flex flex-row items-center gap-x-2">
                                             <div className="select-none bg-yellow-500 font-sans font-bold text-2xl text-black rounded-3xl border-b-2 border-r-2 border p-2">
-                                                {username[0]}
+                                                {post.name[0]}
                                             </div>
                                             <div className="flex flex-col">
                                                 <div className="select-none font-sans font-semibold">
-                                                    {username}
+                                                    {post.name}
                                                 </div>
                                                 <div className="select-none font-sans font-semibold">
-                                                    {email}
+                                                    {post.email}
                                                 </div>
                                             </div>
                                         </div>
